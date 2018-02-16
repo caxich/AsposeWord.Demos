@@ -10,20 +10,28 @@ namespace AsposeWord.Demos
 {
     public class WordTableDemo
     {
+        /// <summary>
+        /// 导出word表格文件
+        /// </summary>
+        /// <returns>文件名</returns>
         public static string Export()
         {
             string mainTitle = "江州市环境保护局";
             string subTitle = "立案登记表";
 
+            //创建文件对象
             Document doc = new Document();
             DocumentBuilder builder = new DocumentBuilder(doc);
 
+            //添加标题
             AsposeWordHelper.SetParagraph(builder, ParagraphAlignment.Center, 18);
             AsposeWordHelper.SetHeaderText(builder, mainTitle, subTitle);
 
+            //添加正文（表格）
             AsposeWordHelper.SetParagraph(builder, ParagraphAlignment.Center, 12);
             AsposeWordHelper.StartTable(builder);
 
+            //添加表格行，每一行的单元格宽度相加的总和必须相等，保证表格每一行对齐
             AsposeWordHelper.SetTableRow(builder, 40);
             AsposeWordHelper.SetNormalCellText(builder, 100, "案件来源");
             AsposeWordHelper.SetMergeCellText(builder, 100, CellMerge.First, CellMerge.None);
