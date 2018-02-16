@@ -10,13 +10,16 @@ namespace AsposeWord.Demos
 {
     public class WordTableDemo
     {
-        public static void Export()
+        public static string Export()
         {
+            string mainTitle = "江州市环境保护局";
+            string subTitle = "立案登记表";
+
             Document doc = new Document();
             DocumentBuilder builder = new DocumentBuilder(doc);
 
             AsposeWordHelper.SetParagraph(builder, ParagraphAlignment.Center, 18);
-            AsposeWordHelper.SetHeaderText(builder, AsposeWordHelper.Title, "立案登记表");
+            AsposeWordHelper.SetHeaderText(builder, mainTitle, subTitle);
 
             AsposeWordHelper.SetParagraph(builder, ParagraphAlignment.Center, 12);
             AsposeWordHelper.StartTable(builder);
@@ -79,7 +82,7 @@ namespace AsposeWord.Demos
 
             AsposeWordHelper.SetTableRow(builder, 70);
             AsposeWordHelper.SetMergeCellText(builder, 100, CellMerge.None, CellMerge.None, "案情简介及\r\n立案理由");
-            AsposeWordHelper.SetMergeCellText(builder, 100, CellMerge.First, CellMerge.None, "\r\n          承办人：\r\n                                      年        月        日");
+            AsposeWordHelper.SetMergeCellText(builder, 100, CellMerge.First, CellMerge.None, "\r\n\r\n\r\n          承办人：\r\n                                      年        月        日");
             AsposeWordHelper.SetMergeCellText(builder, 80, CellMerge.Previous, CellMerge.None);
             AsposeWordHelper.SetMergeCellText(builder, 80, CellMerge.Previous, CellMerge.None);
             AsposeWordHelper.SetMergeCellText(builder, 60, CellMerge.Previous, CellMerge.None);
@@ -87,7 +90,7 @@ namespace AsposeWord.Demos
 
             AsposeWordHelper.SetTableRow(builder, 70);
             AsposeWordHelper.SetMergeCellText(builder, 100, CellMerge.None, CellMerge.None, "承办机构负责人\r\n意见");
-            AsposeWordHelper.SetMergeCellText(builder, 100, CellMerge.First, CellMerge.None, "\r\n          签    名：\r\n                                      年        月        日");
+            AsposeWordHelper.SetMergeCellText(builder, 100, CellMerge.First, CellMerge.None, "\r\n\r\n\r\n          签    名：\r\n                                      年        月        日");
             AsposeWordHelper.SetMergeCellText(builder, 80, CellMerge.Previous, CellMerge.None);
             AsposeWordHelper.SetMergeCellText(builder, 80, CellMerge.Previous, CellMerge.None);
             AsposeWordHelper.SetMergeCellText(builder, 60, CellMerge.Previous, CellMerge.None);
@@ -95,7 +98,7 @@ namespace AsposeWord.Demos
 
             AsposeWordHelper.SetTableRow(builder, 70);
             AsposeWordHelper.SetMergeCellText(builder, 100, CellMerge.None, CellMerge.None, "环保部门负责人\r\n审批意见");
-            AsposeWordHelper.SetMergeCellText(builder, 100, CellMerge.First, CellMerge.None, "\r\n          签    名：\r\n                                      年        月        日");
+            AsposeWordHelper.SetMergeCellText(builder, 100, CellMerge.First, CellMerge.None, "\r\n\r\n\r\n          签    名：\r\n                                      年        月        日");
             AsposeWordHelper.SetMergeCellText(builder, 80, CellMerge.Previous, CellMerge.None);
             AsposeWordHelper.SetMergeCellText(builder, 80, CellMerge.Previous, CellMerge.None);
             AsposeWordHelper.SetMergeCellText(builder, 60, CellMerge.Previous, CellMerge.None);
@@ -109,7 +112,7 @@ namespace AsposeWord.Demos
             AsposeWordHelper.SetMergeCellText(builder, 60, CellMerge.Previous, CellMerge.None);
             AsposeWordHelper.EndRow(builder);
 
-            AsposeWordHelper.SaveDoc(doc, "立案登记表", "企业名");
+            return AsposeWordHelper.SaveDoc(doc, subTitle, "企业名");
         }
     }
 }

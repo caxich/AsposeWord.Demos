@@ -11,8 +11,12 @@ namespace AsposeWord
     public class AsposeWordHelper
     {
         #region word导出帮助类
-        public static string Title = "江州市环境保护局";
-
+        /// <summary>
+        /// 设置段落格式
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="alignment">段落对齐方式</param>
+        /// <param name="lineSpacing">行距</param>
         public static void SetParagraph(DocumentBuilder builder, ParagraphAlignment alignment, int lineSpacing)
         {
             var ph = builder.ParagraphFormat;
@@ -20,6 +24,24 @@ namespace AsposeWord
             // One line equals 12 points. so 1.5 lines = 18 points
             ph.LineSpacing = lineSpacing;
         }
+
+        /// <summary>
+        /// 设置段落格式
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="alignment">段落对齐方式</param>
+        /// <param name="lineSpacing">行距</param>
+        /// <param name="firstLineIndent">首行缩进长度</param>
+        public static void SetParagraph(DocumentBuilder builder, ParagraphAlignment alignment, int lineSpacing, 
+            int firstLineIndent)
+        {
+            var ph = builder.ParagraphFormat;
+            ph.Alignment = alignment;
+            // One line equals 12 points. so 1.5 lines = 18 points
+            ph.LineSpacing = lineSpacing;
+            ph.FirstLineIndent = firstLineIndent;
+        }
+
 
         public static void SetHeaderText(DocumentBuilder builder, string mainTitle, string subTitle = "")
         {
@@ -33,21 +55,40 @@ namespace AsposeWord
             builder.Writeln("");
         }
 
+        /// <summary>
+        /// 添加文字
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="text"></param>
         public static void SetLabelText(DocumentBuilder builder, string text)
         {
             builder.Write(text);
         }
 
+        /// <summary>
+        /// 添加文字（带回车）
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="text"></param>
         public static void SetLabelTextln(DocumentBuilder builder, string text)
         {
             builder.Writeln(text);
         }
 
+        /// <summary>
+        /// 添加回车
+        /// </summary>
+        /// <param name="builder"></param>
         public static void SetTextLn(DocumentBuilder builder)
         {
             builder.Writeln();
         }
 
+        /// <summary>
+        /// 填写文字，如果为空则填充空格
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="text"></param>
         public static void SetValueText(DocumentBuilder builder, string text)
         {
             if (!string.IsNullOrEmpty(text))
@@ -87,6 +128,10 @@ namespace AsposeWord
             font.Underline = under;
         }
 
+        /// <summary>
+        /// 开始添加表格
+        /// </summary>
+        /// <param name="builder"></param>
         public static void StartTable(DocumentBuilder builder)
         {
             builder.StartTable();
@@ -94,6 +139,11 @@ namespace AsposeWord
             builder.Font.Bold = false;
         }
 
+        /// <summary>
+        /// 结束表格，设置自适应及居中显示
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="doc"></param>
         public static void EndTable(DocumentBuilder builder, Document doc)
         {
             builder.EndTable();
@@ -103,12 +153,21 @@ namespace AsposeWord
             doc.FirstSection.Body.Tables[0].Alignment = TableAlignment.Center;
         }
 
+        /// <summary>
+        /// 设置表格行高
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="rowHeight"></param>
         public static void SetTableRow(DocumentBuilder builder, int rowHeight)
         {
             RowFormat rowf = builder.RowFormat;
             rowf.Height = rowHeight;
         }
 
+        /// <summary>
+        /// 结束表格行
+        /// </summary>
+        /// <param name="builder"></param>
         public static void EndRow(DocumentBuilder builder)
         {
             builder.EndRow();
@@ -164,6 +223,12 @@ namespace AsposeWord
             }
         }
 
+        /// <summary>
+        /// 添加单元格并添加文字
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="cellWidth"></param>
+        /// <param name="cellText"></param>
         public static void SetNormalCellText(DocumentBuilder builder, int cellWidth, string cellText = "")
         {
             builder.InsertCell();
@@ -180,6 +245,13 @@ namespace AsposeWord
             }
         }
 
+        /// <summary>
+        /// 保存doc文件
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <param name="fileName">自定义文件名</param>
+        /// <param name="name">自定义文件名</param>
+        /// <returns>完整文件名</returns>
         public static string SaveDoc(Document doc, string fileName, string name)
         {
             string filepath = fileName + DateTime.Now.ToString("yyyy-MM-dd") + name + ".doc";
@@ -187,6 +259,11 @@ namespace AsposeWord
             return filepath;
         }
 
+        /// <summary>
+        /// 插入图片
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="imagePath">图片路径</param>
         public static void SetImage(DocumentBuilder builder, string imagePath)
         {
             builder.InsertImage(imagePath);
@@ -241,16 +318,6 @@ namespace AsposeWord
             builder.Write("月");
             builder.Write(dt.Day.ToString());
             builder.Write("日");
-        }
-        #region 新增
-        public static void SetParagraph(DocumentBuilder builder, ParagraphAlignment alignment, int lineSpacing
-            , int firstLineIndent)
-        {
-            var ph = builder.ParagraphFormat;
-            ph.Alignment = alignment;
-            // One line equals 12 points. so 1.5 lines = 18 points
-            ph.LineSpacing = lineSpacing;
-            ph.FirstLineIndent = firstLineIndent;
         }
 
         /// <summary>
@@ -333,7 +400,6 @@ namespace AsposeWord
             builder.Write("分");
         }
 
-        #endregion
         #endregion
     }
 }
